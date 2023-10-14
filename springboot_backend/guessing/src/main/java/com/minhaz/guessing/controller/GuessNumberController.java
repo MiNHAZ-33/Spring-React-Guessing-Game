@@ -12,7 +12,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:3000")
 public class GuessNumberController {
 
     private final UserRepository userRepository;
@@ -51,27 +51,30 @@ public class GuessNumberController {
         int randomNumber = user.getNumber();
 
         if (userGuess == randomNumber) {
-            responseMap.put("success", "Success! You guessed the correct number: " + randomNumber +
+            responseMap.put("status", "success");
+            responseMap.put("message", "Success! You guessed the correct number: " + randomNumber +
                     ". Total attempts: " + user.getAttempts());
-            responseMap.put("You Win!", "Total attempts taken: " + user.getAttempts());
+            responseMap.put("extra", "Total attempts taken: " + user.getAttempts());
             int totalWins = user.getWins() + 1;
             user.setWins(totalWins);
             userRepository.save(user);
         } else if (userGuess < randomNumber) {
-            responseMap.put("low", "You guessed too low. The correct number is higher. " +
+            responseMap.put("status", "low");
+            responseMap.put("message", "You guessed too low. The correct number is higher. " +
                     "Total attempts: " + user.getAttempts());
             if (user.getAttempts() >= 3) {
-                responseMap.put("You Lost!", "You exceeded the max attempt.");
+                responseMap.put("extra", "You exceeded the max attempt.");
                 user.setAttempts(0);
                 int totalLosses = user.getLosses() + 1;
                 user.setLosses(totalLosses);
                 userRepository.save(user);
             }
         } else {
+            responseMap.put("status", "high");
             responseMap.put("high", "You guessed too high. The correct number is lower. " +
                     "Total attempts: " + user.getAttempts());
             if (user.getAttempts() >= 3) {
-                responseMap.put("You Lost!", "You exceeded the max attempt.");
+                responseMap.put("extra", "You exceeded the max attempt.");
                 user.setAttempts(0);
                 int totalLosses = user.getLosses() + 1;
                 user.setLosses(totalLosses);
