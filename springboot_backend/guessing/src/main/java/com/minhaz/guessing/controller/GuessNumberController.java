@@ -12,6 +12,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:3000")
 public class GuessNumberController {
 
     private final UserRepository userRepository;
