@@ -34,8 +34,8 @@ public class UserController {
         }
         UserInfo user = usersWithUsername.get(0);
         responseMap.put("userName", user.getUserName());
-        responseMap.put("Total Wins", user.getWins());
-        responseMap.put("Total Losses", user.getLosses());
+        responseMap.put("gameWon", user.getWins());
+        responseMap.put("gameLost", user.getLosses());
 
         return ResponseEntity.ok(responseMap);
     }

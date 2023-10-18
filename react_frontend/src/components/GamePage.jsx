@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Card, Form, Button } from "react-bootstrap";
 import Loader from "./Loader";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function GamePage() {
     const [guess, setGuess] = useState("");
@@ -92,6 +93,11 @@ function GamePage() {
                     }
                 </Card.Body>
             </Card>
+            <div>
+                <Link to={"/history"}>
+                    <h5 className="text-center text-white pt-5">Click here to show previous records</h5>
+                </Link>
+            </div>
         </div>
     );
 }
