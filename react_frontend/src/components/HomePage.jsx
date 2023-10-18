@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Loader from './Loader';
+import { useNavigate } from 'react-router-dom'
 
 const HomePage = () => {
     const [loading, setLoading] = useState(false);
     let name = '';
+    const navigate = useNavigate();
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -17,10 +19,11 @@ const HomePage = () => {
         axios.post(`http://localhost:8080/api/generate?userName=${name}`)
             .then(res => {
                 localStorage.setItem('userName', name);
-                console.log(res)
+                //Navigate to the GamePage  
+                console.log(res);
                 setLoading(false);
+                navigate('/game')
             }).catch(err => {
-                console.log(err)
                 setLoading(false)
             })
     }

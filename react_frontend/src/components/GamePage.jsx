@@ -17,7 +17,7 @@ function GamePage() {
         event.preventDefault();
         setLoading(true);
         let userName = localStorage.getItem("userName");
-        axios.get(`http://localhost:8080/api/guess?userName=Minhaz&guess=1`)
+        axios.get(`http://localhost:8080/api/guess?userName=${userName}&guess=${guess}`)
             .then(res => {
                 setLoading(false);
                 console.log(res)
@@ -26,11 +26,15 @@ function GamePage() {
                     setExtraMessage(res.data.extra);
                 } else if (res.data.status === "high") {
                     setMessage(res.data.message);
-                    setExtraMessage(res.data.extra);
+                    if (res.data.extra) {
+                        setExtraMessage(res.data.extra);
+                    }
                 }
                 else {
                     setMessage(res.data.message);
-                    setExtraMessage(res.data.extra);
+                    if (res.data.extra) {
+                        setExtraMessage(res.data.extra);
+                    }
                 }
             }).catch(err => {
                 console.log(err)
@@ -39,30 +43,53 @@ function GamePage() {
         setGuess("");
     }
 
+    const playAgain = () => {
+        let userName = localStorage.getItem("userName");
+        axios.post(`http://localhost:8080/api/generate?userName=${userName}`)
+            .then(res => {
+                localStorage.setItem('userName', userName);
+                console.log(res);
+                setLoading(false);
+                setMessage("");
+                setExtraMessage("");
+            }).catch(err => {
+                setLoading(false)
+            })
+    }
+
     return (
         <div className="container mt-5">
             <Card>
                 <Card.Body>
-                    <Card.Title>Guess the Number</Card.Title>
-                    <Form onSubmit={handleGuessSubmit}>
-                        <Form.Group>
-                            <Form.Label>Guess:</Form.Label>
-                            <Form.Control
-                                type="number"
-                                value={guess}
-                                onChange={handleGuessChange}
-                            />
-                        </Form.Group>
-                        <div className="pt-4 text-center">
-                            {
-                                loading ? <Loader /> : <Button variant="primary" type="submit">
-                                    Submit
-                                </Button>
-                            }
+                    <Card.Title className="text-center">Guess a number between 1-10</Card.Title>
+                    {
+                        extraMessage === "" ? <Form onSubmit={handleGuessSubmit}>
+                            <Form.Group>
+                                <Form.Label>Guess:</Form.Label>
+                                <Form.Control
+                                    type="number"
+                                    value={guess}
+                                    onChange={handleGuessChange}
+                                />
+                            </Form.Group>
+                            <div className="pt-4 text-center">
+                                {
+                                    loading ? <Loader /> : <Button variant="primary" type="submit">
+                                        Submit
+                                    </Button>
+                                }
+                            </div>
+                        </Form> : <div className="text-center">
+                            <h1>Game Over</h1>
+                            <p>{message}</p>
+                            <p>{extraMessage}</p>
                         </div>
-                    </Form>
-                    <p className="mt-3">{message}</p>
-                    <p>{extraMessage}</p>
+                    }
+                    <h2 className="mt-3 text-center">{message}</h2>
+                    {extraMessage !== "" && <div className="text-center">
+                        <button onClick={playAgain} className="btn btn-primary">Play Again</button>
+                    </div>
+                    }
                 </Card.Body>
             </Card>
         </div>

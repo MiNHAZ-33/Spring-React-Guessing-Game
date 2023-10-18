@@ -12,7 +12,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/api")
-//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 public class GuessNumberController {
 
     private final UserRepository userRepository;
@@ -35,7 +35,6 @@ public class GuessNumberController {
             responseMap.put("message", "Please provide a valid integer between 1 to 10 as your guess");
             return ResponseEntity.badRequest().body(responseMap);
         }
-
 
         List<UserInfo> usersWithUsername = userRepository.findByUsername(userName);
         if (usersWithUsername.isEmpty()) {
@@ -71,7 +70,7 @@ public class GuessNumberController {
             }
         } else {
             responseMap.put("status", "high");
-            responseMap.put("high", "You guessed too high. The correct number is lower. " +
+            responseMap.put("message", "You guessed too high. The correct number is lower. " +
                     "Total attempts: " + user.getAttempts());
             if (user.getAttempts() >= 3) {
                 responseMap.put("extra", "You exceeded the max attempt.");
