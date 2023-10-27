@@ -13,7 +13,7 @@ const PlayerRecords = () => {
 
     let userName = localStorage.getItem("userName");
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/profile?userName=${userName}`)
+        axios.get(`http://localhost:8080/api/profiles?userName=${userName}`)
             .then(res => {
                 console.log(res.data)
                 setRecords({
