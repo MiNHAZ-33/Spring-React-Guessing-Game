@@ -1,9 +1,10 @@
-package com.minhaz.guessing.repository;
+package com.airen.guessing.repository;
 
-import com.minhaz.guessing.model.UserInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import com.airen.guessing.model.UserInfo;
 
 import java.util.List;
 

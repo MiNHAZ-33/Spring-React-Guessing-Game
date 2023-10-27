@@ -1,11 +1,12 @@
-package com.minhaz.guessing.controller;
+package com.airen.guessing.controller;
 
-import com.minhaz.guessing.dto.UserInfoDTO;
-import com.minhaz.guessing.repository.UserRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.airen.guessing.dto.UserInfoDTO;
+import com.airen.guessing.repository.UserRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;

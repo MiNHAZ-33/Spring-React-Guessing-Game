@@ -1,4 +1,4 @@
-package com.minhaz.guessing.config;
+package com.airen.guessing.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

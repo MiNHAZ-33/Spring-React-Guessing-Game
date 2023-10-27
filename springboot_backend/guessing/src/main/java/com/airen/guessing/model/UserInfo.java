@@ -1,4 +1,4 @@
-package com.minhaz.guessing.model;
+package com.airen.guessing.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

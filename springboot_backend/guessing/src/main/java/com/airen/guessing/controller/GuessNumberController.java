@@ -1,10 +1,11 @@
-package com.minhaz.guessing.controller;
+package com.airen.guessing.controller;
 
-import com.minhaz.guessing.model.UserInfo;
-import com.minhaz.guessing.repository.UserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import com.airen.guessing.model.UserInfo;
+import com.airen.guessing.repository.UserRepository;
 
 import java.util.LinkedHashMap;
 import java.util.List;

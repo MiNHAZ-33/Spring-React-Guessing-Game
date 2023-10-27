@@ -1,4 +1,4 @@
-package com.minhaz.guessing.dto;
+package com.airen.guessing.dto;
 
 public class UserInfoDTO {
     private String name;
