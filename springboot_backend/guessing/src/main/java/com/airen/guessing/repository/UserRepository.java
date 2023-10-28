@@ -14,3 +14,4 @@ public interface UserRepository extends JpaRepository<UserInfo, Long> {
     @Query("SELECT c FROM UserInfo c WHERE c.userName = ?1")
     List<UserInfo> findByUsername(String userName);
 }
+
